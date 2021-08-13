@@ -25,5 +25,5 @@
     }
   },
   "exclude": ["node_modules", "src/pages/admin/*.jsx"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/consts/icon-table.jsx"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/consts/icon-table.jsx", "src/components/EditWebDataPage.jsx"]
 }

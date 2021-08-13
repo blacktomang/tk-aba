@@ -7,16 +7,16 @@ import { useRouter } from 'next/router';
 import {
   Button,
   Card,
-  CardBody,
-  CardFooter,
+  // CardBody,
+  // CardFooter,
   CardHeader,
   Col,
   EvaIcon,
-  List,
-  ListItem,
+  // List,
+  // ListItem,
   Row,
-  Tab,
-  Tabs,
+  // Tab,
+  // Tabs,
   Tooltip,
 } from '@paljs/ui';
 import { db, storage } from '../../../../../firebase/firebase';
@@ -25,7 +25,7 @@ import { myLoader } from '../../../../../ImageLoader/loader';
 import MaterialTable from 'material-table';
 import { Modal } from 'react-responsive-modal';
 import { deleteFromUrl, uploadImagenGetURL } from '../../../../../service/storage';
-import AddString from '../../../../../components/context/addString';
+// import AddString from '../../../../../components/context/addString';
 
 const IconWrapper = styled.div`
   cursor: pointer;

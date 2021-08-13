@@ -25,12 +25,11 @@ import { useRouter } from 'next/router';
 import BannerData from '../../../../../components/new/BannerData';
 
 function Home() {
-
   return (
-    <Layout title="Home Page">
+    <Layout title="Pengajar | Admin Panel">
       <Row>
         <Col breakPoint={{ xs: 12, lg: 12 }}>
-         <BannerData collection="banners" belongsTo="home"/>
+          <BannerData collection="banners" belongsTo="pengajar" />
         </Col>
       </Row>
     </Layout>

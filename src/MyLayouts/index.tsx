@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, Fragment } from 'react';
+import React, { useState, useRef, useEffect, Fragment, useContext } from 'react';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
 import themes from './themes';
 import { Layout, LayoutContent, LayoutFooter, LayoutContainer, LayoutColumns, LayoutColumn } from '@paljs/ui/Layout';
@@ -13,6 +13,7 @@ import { Menu, MenuRefObject } from '@paljs/ui/Menu';
 import Link from 'next/link';
 import menuItems from './menuItem';
 import SEO, { SEOProps } from 'components/SEO';
+import { AuthContext } from 'components/context/userObserver';
 
 const getDefaultTheme = (): DefaultTheme['name'] => {
   if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
@@ -31,6 +32,8 @@ const LayoutPage: React.FC<SEOProps> = ({ children, ...rest }) => {
   const [menuState, setMenuState] = useState(false);
   const menuRef = useRef<MenuRefObject>(null);
   const [seeHeader, setSeeHeader] = useState(true);
+  const { isAuthenticated } = useContext(AuthContext);
+  console.log(isAuthenticated);
 
   const getState = (state?: 'hidden' | 'visible' | 'compacted' | 'expanded') => {
     setSeeHeader(state !== 'compacted');
@@ -45,6 +48,9 @@ const LayoutPage: React.FC<SEOProps> = ({ children, ...rest }) => {
     const localTheme = getDefaultTheme();
     if (localTheme !== theme && theme === 'default') {
       setTheme(localTheme);
+    }
+    if (!isAuthenticated && router.pathname.startsWith('/admin/panel')) {
+      router.replace('/auth/login');
     }
   }, []);
 

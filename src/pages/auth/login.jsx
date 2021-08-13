@@ -1,10 +1,12 @@
+import { EvaIcon, Spinner, Toastr } from '@paljs/ui';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { Fragment, useContext, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Layout } from '../../components/auth/auth.styles';
+import { AuthContext } from '../../components/context/userObserver';
 import { StyledInput } from '../../components/form-slicing/input.styles';
 
 export const Input = styled(StyledInput)`
@@ -65,16 +67,37 @@ export const AdditionForm = styled.div`
 `;
 function Login() {
   const router = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const toastrRef = useRef(null);
+  const { login, setIsAuthenticated } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const _login = (e) => {
+    e.preventDefault();
+    e.preventDefault();
+    setIsLoading(true);
+    login(email, password)
+      .then(() => {
+        setIsAuthenticated(true);
+        router.replace('/admin/panel/dd');
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        alert(error.message);
+      });
+  };
   return (
-    <>
+    <Fragment>
       <Head>
         <title>FishLog | Login</title>
         <link rel="icon" href="/images/logo.svg" />
       </Head>
       <Layout>
         <div>
-          <div style={{ width: '100%' }}>
-            <Image src="/images/auth-banner.png" width={500} height={250} alt="auth banner" layout="responsive" />
+          <div style={{ width: '100%', display:"flex", justifyContent:"center"}}>
+            <h2 style={{ color: "white" }}>Admin Panel TK ABA</h2>
+            <small style={{fontFamily:"Poppins", color:"white", fontSize:"10px"}}>by UMM PMM 2021</small>
           </div>
         </div>
         <div>
@@ -83,39 +106,25 @@ function Login() {
             Selamat datang kembali di <br />
             Platform Ekosistem Rantai Pasok Perikanan <br /> Terintegrasi di Indonesia
           </p>
-          <Input placeholder="Enter Your Email" type="text" />
-          <Input placeholder="Enter Your Password" type="password" autoComplete="false" />
-          <AdditionForm>
-            <div className="checkbox">
-              <input type="checkbox" name="" id="t" />
-              <label htmlFor="t">Ingat Saya</label>
-            </div>
-            <div>
-              <Link href="/auth/reset-sandi">
-                <a>Lupa Password?</a>
-              </Link>
-            </div>
-          </AdditionForm>
-          <Input value="Masuk" type="submit" $masuk="var(--first-color)" />
-          <AdditionForm $toRegister>
-            <div>
-              <Link href="">
-                <a>Belum memiliki akun?</a>
-              </Link>
-            </div>
-            <div style={{ width: '50%' }}>
-              <Input
-                value="Daftar Sekarang"
-                type="submit"
-                $masuk="#FFB946"
-                $register
-                onClick={() => router.push('/auth/register')}
-              />
-            </div>
-          </AdditionForm>
+          <form onSubmit={_login}>
+            {isLoading && <Spinner />}
+            <Input placeholder="Enter Your Email" type="text" onChange={(e) => setEmail(e.target.value)} />
+            <Input
+              placeholder="Enter Your Password"
+              type={showPassword ? 'text' : 'password'}
+              autoComplete="false"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <AdditionForm>
+              <div className="checkbox" onClick={() => setShowPassword(!showPassword)} style={{ width: '100%'}}>
+                <p>{showPassword ? 'Hide Password' : 'Show Password'}</p>
+              </div>
+            </AdditionForm>
+            <Input value="Masuk" type="submit" onClick={_login} $masuk="var(--first-color)" />
+          </form>
         </div>
       </Layout>
-    </>
+    </Fragment>
   );
 }
 

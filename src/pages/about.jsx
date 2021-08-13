@@ -1,28 +1,27 @@
 import Head from 'next/head';
 import Banner from '../components/spanduk/banner.component';
-import MiddleBanner, { Insider } from '../components/spanduk/middle-banner.component';
+// import MiddleBanner, { Insider } from '../components/spanduk/middle-banner.component';
 import Card from '../components/card/flexible-card.component';
-import LeadershipCard from '../components/card/leadership.component';
+// import LeadershipCard from '../components/card/leadership.component';
 import Navbar from '../components/navbar/navbar.component';
-import { Container } from '../components/navbar/navbar.styles';
+// import { Container } from '../components/navbar/navbar.styles';
 import Section from '../components/section/section.component';
-import JoinForm from '../components/card/join-form.component';
+// import JoinForm from '../components/card/join-form.component';
 import Footer from '../components/footer/footer.component';
 import useFirestore from '../components/context/useFirestore';
+import SEO from '../components/SEO';
+import React, { Fragment } from 'react';
 
 export default function About() {
-  const solutionProblem = useFirestore('problemSolutions');
-  const problems = solutionProblem.docs.filter((item) => item.is === 'problems');
-  const solutions = solutionProblem.docs.filter((item) => item.is === 'solutions');
 
   return (
-    <>
-      <Head>
-        <title>Tentang TK ABA </title>
-        <link rel="icon" href="/images/logo.svg" />
-      </Head>
+    <Fragment>
+      <SEO
+        title="Tentang | TK Aisyiyah Bustanul Athfal"
+        description="Sejarah atau Perjalanan TK Aisyiyah Bustanul Athfal"
+      />
       <Navbar />
-      <Banner belongsTo="about" about />
+      <Banner belongsTo="about" />
       <Section normalTitle title="Perjalanan TK ABA">
         <Card
           image="/images/journey/2018.png"
@@ -131,6 +130,6 @@ export default function About() {
       ></Section> */}
       {/* <JoinForm /> */}
       <Footer />
-    </>
+    </Fragment>
   );
 }

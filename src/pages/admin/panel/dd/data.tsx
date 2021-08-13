@@ -1,18 +1,18 @@
 import React from 'react';
 import Layout from 'MyLayouts';
-import { Card, CardBody, CardHeader, Col } from '@paljs/ui';
+import EditWebDataPage from 'components/EditWebDataPage';
+import { Col, Row } from '@paljs/ui';
+
+
 
 const Home = () => {
   return (
     <Layout title="Web Data">
-      <Col breakPoint={{ xs: 12 }}>
-        <Card accent="Primary">
-          <CardHeader> <header>Web Data</header> <p>Halaman untuk mengatur logo, alamat, kontak, dan nama sekolah</p></CardHeader>
-          <CardBody>
-            s
-          </CardBody>
-        </Card>
-      </Col>
+      <Row>
+        <Col breakPoint={{ xs: 12, lg: 12 }}>
+          <EditWebDataPage collection="web-info" />
+        </Col>
+      </Row>
     </Layout>
   );
 };

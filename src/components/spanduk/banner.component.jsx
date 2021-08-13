@@ -8,12 +8,14 @@ import useFirestore from '../context/useFirestore';
 import { BannerContainer, BannerContainerExtends, BannerImage, ControleWidth } from './banner.styles';
 import { myLoader } from '../../ImageLoader/loader';
 import { Input } from '../../pages/auth/login';
+import { useRouter } from 'next/router';
 function Banner({ belongsTo, about, coldStorage, login, children }) {
   const { banner } = getBannerStore('banners', belongsTo);
   const result = banner[0];
   const { docs } = useFirestore('web-info');
   console.log(JSON.stringify(result));
-
+  const router = useRouter();
+  
   return (
     <>
       {result !== undefined ? (
@@ -41,20 +43,24 @@ function Banner({ belongsTo, about, coldStorage, login, children }) {
                         <h4 style={{ marginBottom: '1rem' }}>{result.title}</h4>
                       </HandlingColor>
                       <HandlingColor color={about ? '' : 'white'}>
-                        {result.subtitle && <h5 dangerouslySetInnerHTML={{ __html: result.subtitle }}></h5>}
+                        {result.subtitle && (
+                          <h5 dangerouslySetInnerHTML={{ __html: result.subtitle }}>
+                            <p>{resul}</p>
+                          </h5>
+                        )}
                       </HandlingColor>
                     </ScrollAnimation>
                     <ScrollAnimation animateIn="animate__fadeInLeftBig" initiallyVisible={false} animateOnce={true}>
-                      <HandlingColor
-                        $bold={about}
-                        color={about ? '' : 'white'}
-                        dangerouslySetInnerHTML={{ __html: result.desc }}
-                      ></HandlingColor>
+                      <HandlingColor $bold={about} color={about ? '' : 'white'}>
+                        <p>{result.desc}</p>
+                      </HandlingColor>
                     </ScrollAnimation>
+                    {
+                      router.pathname === '/'?
                     <a href={`https://wa.me/${docs[0] ? docs[0].contact : ''}`} target="_blank">
                       <ButtonHere>Hubungi Kami</ButtonHere>
-                    </a>
-                    {/* <button>asu</button> */}
+                    </a>:<div/>
+                    }
                   </BannerContainer>
                 </ControleWidth>
                 <BannerImage $specific={coldStorage}>
@@ -84,10 +90,9 @@ function Banner({ belongsTo, about, coldStorage, login, children }) {
                   </HandlingColor>
                 </ScrollAnimation>
                 <ScrollAnimation animateIn="animate__fadeIn" initiallyVisible={false} animateOnce={true} delay={2000}>
-                  <HandlingColor
-                    color={about ? '' : 'white'}
-                    dangerouslySetInnerHTML={{ __html: result.desc }}
-                  ></HandlingColor>
+                  <HandlingColor color={about ? '' : 'white'} >
+                    <p>{result.desc}</p>
+                  </HandlingColor>
                 </ScrollAnimation>
               </div>
             )}

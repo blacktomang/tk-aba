@@ -12,7 +12,7 @@ import Images from '../components/images/images.component';
 import useFirestore from '../components/context/useFirestore';
 import { myLoader } from '../ImageLoader/loader';
 import SEO, { SEOProps } from '../components/SEO';
-import { createRef, Fragment, useEffect, useRef, useState } from 'react';
+import React,{ createRef, Fragment, useEffect, useRef, useState } from 'react';
 
 export default function Home() {
   const web = useFirestore('web-info');
@@ -22,19 +22,15 @@ export default function Home() {
       <SEO title="Beranda | TK Aisyiyah Bustanul Athfal" description="TK Aisyiyah Bustanul Athfal DAU" />
       <Navbar />
       <Banner belongsTo="home" />
-
       {web.docs[0] ? <Intro image={web.docs[0].introImg} text={web.docs[0].intro} /> : <div></div>}
 
       <Section normalTitle title="Pengajar">
-        {/* {docs.map(({ title, desc, url, id }) => { */}
-        {/* return <Card key={id} zigzag image={url} title={title} desc={desc} loader={myLoader} />; */}
-        {/* })} */}
         <WhoJoin />
       </Section>
       <br />
       <br />
       <Section normalTitle title="Galeri">
-        <Images category="galeri" />
+        <Images category="galeri" all="no"/>
       </Section>
       <Footer />
     </Fragment>

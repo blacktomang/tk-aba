@@ -1,12 +1,5 @@
 import { MenuItemType } from '@paljs/ui/types';
 
-const CARD_URL = {
-  partners: 'partners',
-  investments: 'investments',
-  hiring: 'hiring',
-  products: 'products',
-};
-
 const items: MenuItemType[] = [
   {
     title: 'Home Page',
@@ -36,11 +29,11 @@ const items: MenuItemType[] = [
       },
       {
         title: 'Galeri',
-        link: { href: '/admin/panel/dd/pages/FSC' },
+        link: { href: '/admin/panel/dd/pages/Galery' },
       },
       {
         title: 'Pengajar',
-        link: { href: '/admin/panel/dd/pages/Ecosystem' },
+        link: { href: '/admin/panel/dd/pages/Pengajar' },
       },
     ],
   },
@@ -50,11 +43,11 @@ const items: MenuItemType[] = [
     children: [
       {
         title: 'Pengajar',
-        link: { href: `/admin/panel/dd/${CARD_URL.partners}` },
+        link: { href: `/admin/panel/dd/data-pengajar` },
       },
        {
         title: 'Galeri',
-        link: { href: `/admin/panel/dd/galeri` },
+        link: { href: `/admin/panel/dd/data-galeri` },
       },
      
     ],

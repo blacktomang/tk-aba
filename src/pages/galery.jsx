@@ -12,25 +12,17 @@ import Images from '../components/images/images.component';
 import useFirestore from '../components/context/useFirestore';
 import { myLoader } from '../ImageLoader/loader';
 import SEO, { SEOProps } from '../components/SEO';
-import { createRef, useEffect, useRef, useState } from 'react';
+import React,{Fragment, createRef, useEffect, useRef, useState } from 'react';
 export default function Galery() {
-  const { docs } = useFirestore('pengajar');
-  console.log(docs);
-  const web = useFirestore('web-info');
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-    return () => {};
-  }, []);
   return (
-    <>
-      <SEO title="Galeri | TK Aisyiyah Bustanul Athfal" description="TK Aisyiyah Bustanul Athfal" />
+    <Fragment>
+      <SEO title="Galeri | TK Aisyiyah Bustanul Athfal" description="Galeri Kegiatan ataua Kenangan TK Aisyiyah Bustanul Athfal" />
       <Navbar />
       <Banner belongsTo="galery" />
       <Section normalTitle title="Galeri">
-        <Images category="galeri" />
+        <Images category="galeri" all="all"/>
       </Section>
       <Footer />
-    </>
+    </Fragment>
   );
 }

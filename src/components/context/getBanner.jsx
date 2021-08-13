@@ -7,7 +7,6 @@ export default function getBannerStore(collection, page) {
     useEffect(() => {
       const unsub = db.collection(collection)
         .where("belongsTo", "==", page)
-        .orderBy("createAt", "asc")
         .onSnapshot(snap => {
           let documents = [];
           snap.forEach(doc => {

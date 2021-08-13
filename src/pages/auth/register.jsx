@@ -268,9 +268,6 @@ function Register() {
         const json = await loginRes.json();
         const data = await json.data;
         firebaseLogin(data.token);
-        // if (data) {
-        //   localStorage.setItem("token", data.token)
-        // };
         alert('Registrasi berhasil!');
         router.push('/auth/cold-storage-confirmation');
       } else {
