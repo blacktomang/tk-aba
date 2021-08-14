@@ -10,7 +10,7 @@ const items: MenuItemType[] = [
     title: 'List Content',
     group: true,
   },
-   {
+  {
     title: 'Web Data',
     icon: { name: 'settings-2-outline' },
     link: { href: '/admin/panel/dd/data' },
@@ -45,11 +45,14 @@ const items: MenuItemType[] = [
         title: 'Pengajar',
         link: { href: `/admin/panel/dd/data-pengajar` },
       },
-       {
+      {
         title: 'Galeri',
         link: { href: `/admin/panel/dd/data-galeri` },
       },
-     
+      {
+        title: 'Sejarah/Pencapaian',
+        link: { href: `/admin/panel/dd/data-sejarah` },
+      },
     ],
   },
 ];

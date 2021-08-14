@@ -73,13 +73,15 @@ export default function AuthProvider({ children }){
               switch (code) {
                 case 'auth/wrong-password':
                 case 'auth/user-not-found':
-                  message = 'Username or password incorrect';
+                  message = 'Email or password salah';
                   break;
                 case 'unauthorized':
                   message = 'Account unauthorized';
                   break;
+                case 'auth/invalid-email':
+                  message = 'Hindari simbol yang tidak diperlukan(spasi dll)'
                 default:
-                  message = e;
+                  message = '';
               }
               reject({ message });
             }
